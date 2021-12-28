@@ -55,7 +55,61 @@ class PessoaController {
             await database.Pessoas.destroy({
                 where: { id: parseInt(id) }
             })
-            return res.status(200).json({message: `Usuário ${id} deletado com suceso`});
+            return res.status(200).json({ message: `Usuário ${id} deletado com suceso` });
+
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+    //matriculas
+    // http://localhost:3000/pessoas/1/matricula/5
+    // http://localhost:3000/pessoas/:estudanteId/matricula/:matriculaId
+    static async obterMatriculaPorId(req, res) {
+        const { estudanteId, matriculaId } = req.params;
+        try {
+            const umaMatricula = await database.Matriculas.findOne({
+                where: {
+                    id: parseInt(matriculaId),
+                    estudanteId: parseInt(estudanteId)
+                }
+            })
+            return res.status(200).json(umaMatricula)
+        } catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
+    static async criarMatricula(req, res) {
+        const { estudanteId } = req.params
+        const novaMatricula = { ...req.body, estudanteId: Number(estudanteId) };
+        try {
+            const novaMatriculaCriada = await database.Matriculas.create(novaMatricula)
+            res.status(201).json(novaMatricula);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+    static async atualizarMatricula(req, res) {
+        const { estudanteId, matriculaId } = req.params;
+        const novasInfos = req.body;
+        try {
+            await database.Matriculas.update(novasInfos, { where: { id: parseInt(matriculaId), estudante_id: parseInt(estudanteId) } })
+            const MatriculaAtualizada = await database.Matriculas.findOne({
+                where: {
+                    id: parseInt(matriculaId)
+                }
+            })
+            return res.status(200).json(MatriculaAtualizada);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+    static async deletarMatricula(req, res) {
+        const { estudanteId, matriculaId } = req.params;
+        try {
+            await database.Matriculas.destroy({
+                where: { id: parseInt(matriculaId) }
+            })
+            return res.status(200).json({ message: `Matricula ${matriculaId} deletado com suceso` });
 
         } catch (error) {
             return res.status(500).json(error.message);

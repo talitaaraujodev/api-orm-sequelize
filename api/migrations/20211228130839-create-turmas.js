@@ -1,15 +1,15 @@
-"use strict";
+'use strict';
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Turmas", {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('Turmas', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       data_inicio: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DATEONLY
       },
       docente_id: {
         allowNull: false,
@@ -23,15 +23,15 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-      },
+        type: Sequelize.DATE
+      }
     });
   },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("Turmas");
-  },
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('Turmas');
+  }
 };
