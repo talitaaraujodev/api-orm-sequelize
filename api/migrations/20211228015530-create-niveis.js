@@ -1,14 +1,14 @@
 'use strict';
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Niveis', {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('Niveis', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      desc_nivel: {
+      descr_nivel: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -21,7 +21,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Niveis');
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('Niveis');
   }
 };

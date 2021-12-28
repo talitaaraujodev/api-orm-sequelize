@@ -1,18 +1,20 @@
+'use strict';
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
 		return queryInterface.bulkInsert('Niveis', [
 			{
-				desc_nivel: 'básico',
+				descr_nivel: 'básico',
 				createdAt: new Date(),
 				updatedAt: new Date()			
 			},
 			{
-				desc_nivel: 'intermediário',
+				descr_nivel: 'intermediário',
 				createdAt: new Date(),
 				updatedAt: new Date()
 			},
 			{
-				desc_nivel: 'avançado',
+				descr_nivel: 'avançado',
 				createdAt: new Date(),
 				updatedAt: new Date()
 			} 
